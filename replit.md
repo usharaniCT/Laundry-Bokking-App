@@ -84,6 +84,9 @@ The application follows a traditional MVC (Model-View-Controller) architecture u
   - Button state management for payment confirmation
 - **QR Code**: Integrated actual QR code image for UPI payments
 - **Branding**: Updated system title and footer with SRIT Autonomous branding
+- **UI Improvements**: Added border radius to booking forms and cards
+- **Payment Status**: Dynamic payment status display with color changes
+- **Enhanced History**: Improved booking history with detailed information and icons
 
 ### Current Limitations
 - Password security needs improvement (hashing required)

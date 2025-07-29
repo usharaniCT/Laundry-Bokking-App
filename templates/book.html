@@ -5,9 +5,9 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-lg-8">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="mb-0">
+        <div class="card" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
+            <div class="card-header" style="border-radius: 15px 15px 0 0; background: linear-gradient(135deg, #007bff, #0056b3);">
+                <h4 class="mb-0" style="color: white;">
                     Book Laundry Slot
                 </h4>
             </div>
@@ -95,10 +95,13 @@
                         </select>
                     </div>
 
-                    <div class="alert alert-info">
+                    <div class="alert alert-info" style="background: linear-gradient(135deg, #17a2b8, #138496); border: none; color: white; border-radius: 10px;">
                         <strong>Important:</strong> Please ensure you arrive at your booked time slot. 
                         Late arrivals may result in slot cancellation.
                     </div>
+
+                    <!-- Payment Status Display -->
+                    <div id="payment-status" class="alert" style="display: none; border-radius: 10px;"></div>
 
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <a href="{{ url_for('dashboard') }}" class="btn btn-secondary me-md-2">
@@ -117,5 +120,39 @@
 <script>
 // Set minimum date to today
 document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+// Payment method selection handler
+document.getElementById('payment_method').addEventListener('change', function() {
+    const paymentStatus = document.getElementById('payment-status');
+    const selectedMethod = this.value;
+    
+    if (selectedMethod) {
+        paymentStatus.style.display = 'block';
+        
+        if (selectedMethod === 'Cash') {
+            paymentStatus.className = 'alert alert-success';
+            paymentStatus.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            paymentStatus.style.color = 'white';
+            paymentStatus.innerHTML = '<strong>Cash Payment Selected</strong> - You can proceed with booking. Please bring exact amount during your slot.';
+        } else if (selectedMethod === 'UPI') {
+            paymentStatus.className = 'alert alert-info';
+            paymentStatus.style.background = 'linear-gradient(135deg, #17a2b8, #20c997)';
+            paymentStatus.style.color = 'white';
+            paymentStatus.innerHTML = '<strong>UPI Payment Selected</strong> - You will be redirected to payment page after booking confirmation.';
+        } else if (selectedMethod === 'Online') {
+            paymentStatus.className = 'alert alert-info';
+            paymentStatus.style.background = 'linear-gradient(135deg, #6f42c1, #20c997)';
+            paymentStatus.style.color = 'white';
+            paymentStatus.innerHTML = '<strong>Online Payment Selected</strong> - You will be redirected to secure payment gateway after booking.';
+        } else if (selectedMethod === 'Card') {
+            paymentStatus.className = 'alert alert-info';
+            paymentStatus.style.background = 'linear-gradient(135deg, #fd7e14, #20c997)';
+            paymentStatus.style.color = 'white';
+            paymentStatus.innerHTML = '<strong>Card Payment Selected</strong> - Debit/Credit card payment will be processed securely.';
+        }
+    } else {
+        paymentStatus.style.display = 'none';
+    }
+});
 </script>
 {% endblock %}

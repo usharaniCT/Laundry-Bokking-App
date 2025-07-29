@@ -1,4 +1,5 @@
 from app import db
+from datetime import datetime
 
 class Booking(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +13,7 @@ class Booking(db.Model):
     clothes = db.Column(db.String(100))
     status = db.Column(db.String(50), default='Pending')
     payment_status = db.Column(db.String(50), default='Unpaid')
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
