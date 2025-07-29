@@ -20,24 +20,66 @@
         </div>
 
         {% if user %}
+            <!-- Quick Stats Dashboard -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="card text-center" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border-radius: 15px;">
+                        <div class="card-body py-3">
+                            <h4 id="available-slots">12</h4>
+                            <small>Available Slots Today</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center" style="background: linear-gradient(135deg, #007bff, #0056b3); color: white; border-radius: 15px;">
+                        <div class="card-body py-3">
+                            <h4 id="user-bookings">0</h4>
+                            <small>Your Active Bookings</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center" style="background: linear-gradient(135deg, #ffc107, #fd7e14); color: white; border-radius: 15px;">
+                        <div class="card-body py-3">
+                            <h4 id="next-slot">2:00 PM</h4>
+                            <small>Next Available</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-center" style="background: linear-gradient(135deg, #6f42c1, #563d7c); color: white; border-radius: 15px;">
+                        <div class="card-body py-3">
+                            <h4 id="queue-status">Low</h4>
+                            <small>Current Queue</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="row g-4">
                 <div class="col-md-6">
-                    <div class="card h-100">
+                    <div class="card h-100" style="border-radius: 15px; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                         <div class="card-body text-center">
+                            <div style="background: linear-gradient(135deg, #007bff, #0056b3); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <span style="color: white; font-size: 24px;">📅</span>
+                            </div>
                             <h5 class="card-title">Book New Slot</h5>
                             <p class="card-text">Schedule your laundry time and select your preferred wash options.</p>
-                            <a href="{{ url_for('book') }}" class="btn btn-primary">
+                            <a href="{{ url_for('book') }}" class="btn btn-primary" style="border-radius: 25px; padding: 10px 30px;">
                                 Book Now
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card h-100">
+                    <div class="card h-100" style="border-radius: 15px; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                         <div class="card-body text-center">
+                            <div style="background: linear-gradient(135deg, #17a2b8, #138496); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <span style="color: white; font-size: 24px;">📋</span>
+                            </div>
                             <h5 class="card-title">Booking History</h5>
                             <p class="card-text">View your past and current laundry bookings and their status.</p>
-                            <a href="{{ url_for('history', student_name=session.username) }}" class="btn btn-info">
+                            <a href="{{ url_for('history', student_name=session.username) }}" class="btn btn-info" style="border-radius: 25px; padding: 10px 30px;">
                                 View History
                             </a>
                         </div>
@@ -45,37 +87,72 @@
                 </div>
             </div>
         {% else %}
+            <!-- Feature Preview Cards -->
+            <div class="row g-4 mb-4">
+                <div class="col-md-12">
+                    <div class="card" style="background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(0,86,179,0.1)); border: none; border-radius: 15px;">
+                        <div class="card-body text-center py-4">
+                            <h5 style="color: #007bff;">🚀 System Features</h5>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <small class="quick-action-btn">Real-time Booking</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="quick-action-btn">UPI Payments</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="quick-action-btn">Smart Scheduling</small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="quick-action-btn">24/7 Support</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="card h-100">
+                    <div class="card h-100" style="border-radius: 15px; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                         <div class="card-body text-center">
+                            <div style="background: linear-gradient(135deg, #28a745, #20c997); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <span style="color: white; font-size: 24px;">👤</span>
+                            </div>
                             <h5 class="card-title">Student Login</h5>
                             <p class="card-text">Access your account to book laundry slots and manage bookings.</p>
-                            <a href="{{ url_for('student_login') }}" class="btn btn-success">
+                            <a href="{{ url_for('student_login') }}" class="btn btn-success" style="border-radius: 25px; padding: 10px 30px;">
                                 Login
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100">
+                    <div class="card h-100" style="border-radius: 15px; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                         <div class="card-body text-center">
+                            <div style="background: linear-gradient(135deg, #ffc107, #fd7e14); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <span style="color: white; font-size: 24px;">✨</span>
+                            </div>
                             <h5 class="card-title">New Student</h5>
                             <p class="card-text">Create a new account to start booking laundry slots.</p>
-                            <a href="{{ url_for('register') }}" class="btn btn-warning">
+                            <a href="{{ url_for('register') }}" class="btn btn-warning" style="border-radius: 25px; padding: 10px 30px;">
                                 Register
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card h-100">
-                        <div class="card-body text-center">
+                    <div class="card h-100" style="border-radius: 15px; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <div class="card-body text-center position-relative">
+                            <div style="background: linear-gradient(135deg, #dc3545, #c82333); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                                <span style="color: white; font-size: 24px;">🛠️</span>
+                            </div>
                             <h5 class="card-title">Admin Access</h5>
                             <p class="card-text">Administrative access to manage all bookings and system operations.</p>
-                            <a href="{{ url_for('admin_login') }}" class="btn btn-danger">
+                            <a href="{{ url_for('admin_login') }}" class="btn btn-danger" style="border-radius: 25px; padding: 10px 30px;">
                                 Admin Login
                             </a>
+                            <div class="notification-badge">3</div>
                         </div>
                     </div>
                 </div>

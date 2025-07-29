@@ -67,6 +67,53 @@
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
+        /* Real-time status animation */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* Notification styles */
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-3px); }
+        }
+        
+        /* Quick action buttons */
+        .quick-action-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 0 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="{% block body_class %}{% endblock %}">
@@ -75,6 +122,12 @@
             <a class="navbar-brand" href="{{ url_for('dashboard') }}">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="SRIT Logo" height="50" class="d-inline-block align-text-top" style="border-radius: 8px;">
             </a>
+            
+            <!-- Real-time Status Indicator -->
+            <div id="system-status" style="display: inline-flex; align-items: center; margin-left: 15px;">
+                <span id="status-dot" style="width: 8px; height: 8px; background: #28a745; border-radius: 50%; margin-right: 5px; animation: pulse 2s infinite;"></span>
+                <small style="color: #28a745; font-weight: 500;">System Online</small>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
