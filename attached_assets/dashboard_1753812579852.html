@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Laundry Booking System{% endblock %}
+
+{% block body_class %}home-page{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="text-center mb-5">
+            <h1 class="display-4 mb-3" style="color: white;">
+                Welcome to Laundry Booking System Book Your Laundry
+            </h1>
+        </div>
+
+        {% if user %}
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Book New Slot</h5>
+                            <p class="card-text">Schedule your laundry time and select your preferred wash options.</p>
+                            <a href="{{ url_for('book') }}" class="btn btn-primary">
+                                Book Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Booking History</h5>
+                            <p class="card-text">View your past and current laundry bookings and their status.</p>
+                            <a href="{{ url_for('history', student_name=session.username) }}" class="btn btn-info">
+                                View History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Student Login</h5>
+                            <p class="card-text">Access your account to book laundry slots and manage bookings.</p>
+                            <a href="{{ url_for('student_login') }}" class="btn btn-success">
+                                Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">New Student</h5>
+                            <p class="card-text">Create a new account to start booking laundry slots.</p>
+                            <a href="{{ url_for('register') }}" class="btn btn-warning">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Admin Access</h5>
+                            <p class="card-text">Administrative access to manage all bookings and system operations.</p>
+                            <a href="{{ url_for('admin_login') }}" class="btn btn-danger">
+                                Admin Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Book Slot - Laundry Booking System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    Book Laundry Slot
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="student_name" class="form-label">
+                                Student Name *
+                            </label>
+                            <input type="text" class="form-control" id="student_name" name="student_name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="room_no" class="form-label">
+                                Room Number *
+                            </label>
+                            <input type="text" class="form-control" id="room_no" name="room_no" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="date" class="form-label">
+                                Date *
+                            </label>
+                            <input type="date" class="form-control" id="date" name="date" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="time" class="form-label">
+                                Time Slot *
+                            </label>
+                            <select class="form-select" id="time" name="time" required>
+                                <option value="">Select Time Slot</option>
+                                <option value="06:00-08:00">06:00 - 08:00 AM</option>
+                                <option value="08:00-10:00">08:00 - 10:00 AM</option>
+                                <option value="10:00-12:00">10:00 - 12:00 PM</option>
+                                <option value="12:00-14:00">12:00 - 02:00 PM</option>
+                                <option value="14:00-16:00">02:00 - 04:00 PM</option>
+                                <option value="16:00-18:00">04:00 - 06:00 PM</option>
+                                <option value="18:00-20:00">06:00 - 08:00 PM</option>
+                                <option value="20:00-22:00">08:00 - 10:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="cloth_type" class="form-label">
+                                Cloth Type *
+                            </label>
+                            <select class="form-select" id="cloth_type" name="cloth_type" required>
+                                <option value="">Select Cloth Type</option>
+                                <option value="Regular Clothes">Regular Clothes</option>
+                                <option value="Delicate Fabrics">Delicate Fabrics</option>
+                                <option value="Heavy Items (Blankets/Comforters)">Heavy Items (Blankets/Comforters)</option>
+                                <option value="Sportswear">Sportswear</option>
+                                <option value="Formal Wear">Formal Wear</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="wash_type" class="form-label">
+                                Wash Type *
+                            </label>
+                            <select class="form-select" id="wash_type" name="wash_type" required>
+                                <option value="">Select Wash Type</option>
+                                <option value="Normal Wash">Normal Wash</option>
+                                <option value="Quick Wash">Quick Wash (30 min)</option>
+                                <option value="Heavy Duty">Heavy Duty</option>
+                                <option value="Delicate Wash">Delicate Wash</option>
+                                <option value="Cold Water Wash">Cold Water Wash</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="payment_method" class="form-label">
+                            Payment Method *
+                        </label>
+                        <select class="form-select" id="payment_method" name="payment_method" required>
+                            <option value="">Select Payment Method</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Online">Online Payment</option>
+                            <option value="Card">Debit/Credit Card</option>
+                        </select>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <strong>Important:</strong> Please ensure you arrive at your booked time slot. 
+                        Late arrivals may result in slot cancellation.
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary me-md-2">
+                            Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            Book Slot
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Set minimum date to today
+document.getElementById('date').min = new Date().toISOString().split('T')[0];
+</script>
+{% endblock %}

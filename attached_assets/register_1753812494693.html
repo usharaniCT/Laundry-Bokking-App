@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Laundry Booking System{% endblock %}
+
+{% block content %}
+<style>
+    .register-card {
+        border-radius: 20px !important;
+    }
+    .register-card .card-header {
+        border-top-left-radius: 20px !important;
+        border-top-right-radius: 20px !important;
+    }
+    .register-card .card-body {
+        border-bottom-left-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+    }
+    .register-card .form-control {
+        border-radius: 10px !important;
+    }
+    .register-card .btn {
+        border-radius: 10px !important;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card register-card">
+            <div class="card-header text-center">
+                <h4>
+                    Student Registration
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username" class="form-label">
+                                Username *
+                            </label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                            <div class="form-text">Choose a unique username for your account.</div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">
+                                Email Address *
+                            </label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="form-text">Enter your valid email address.</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">
+                            Phone Number *
+                        </label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required>
+                        <div class="form-text">Enter your 10-digit phone number.</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password" class="form-label">
+                                Password *
+                            </label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="confirm_password" class="form-label">
+                                Confirm Password *
+                            </label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-warning">
+                            Register
+                        </button>
+                    </div>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <p class="mb-0">Already have an account?</p>
+                    <a href="{{ url_for('student_login') }}" class="btn btn-outline-success btn-sm">
+                        Login Here
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

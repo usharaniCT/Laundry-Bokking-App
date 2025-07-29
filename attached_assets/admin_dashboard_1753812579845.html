@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard - Laundry Booking System{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>
+                Admin Dashboard
+            </h2>
+            <span class="badge bg-primary">{{ bookings|length }} Total Bookings</span>
+        </div>
+
+        {% if bookings %}
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        All Bookings
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Student Name</th>
+                                    <th>Room No</th>
+                                    <th>Date & Time</th>
+                                    <th>Cloth Type</th>
+                                    <th>Wash Type</th>
+                                    <th>Payment Method</th>
+                                    <th>Payment Status</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in bookings %}
+                                <tr>
+                                    <td>{{ booking.id }}</td>
+                                    <td>{{ booking.student_name }}</td>
+                                    <td>{{ booking.room_no }}</td>
+                                    <td>
+                                        <small>
+                                            {{ booking.date }}<br>
+                                            {{ booking.time }}
+                                        </small>
+                                    </td>
+                                    <td>{{ booking.cloth_type }}</td>
+                                    <td>{{ booking.wash_type }}</td>
+                                    <td>{{ booking.payment_method }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ 'success' if booking.payment_status == 'Paid' else 'warning' }}">
+                                            {{ booking.payment_status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-{{ 'success' if booking.status == 'Confirmed' else 'primary' if booking.status == 'Completed' else 'secondary' }}">
+                                            {{ booking.status }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            {% if booking.status != 'Confirmed' %}
+                                            <a href="{{ url_for('update_status', booking_id=booking.id, status='Confirmed') }}" 
+                                               class="btn btn-success btn-sm" 
+                                               onclick="return confirm('Confirm this booking?')">
+                                                Confirm
+                                            </a>
+                                            {% endif %}
+                                            {% if booking.status != 'Completed' %}
+                                            <a href="{{ url_for('update_status', booking_id=booking.id, status='Completed') }}" 
+                                               class="btn btn-primary btn-sm"
+                                               onclick="return confirm('Mark as completed?')">
+                                                Complete
+                                            </a>
+                                            {% endif %}
+                                            {% if booking.status != 'Cancelled' %}
+                                            <a href="{{ url_for('update_status', booking_id=booking.id, status='Cancelled') }}" 
+                                               class="btn btn-danger btn-sm"
+                                               onclick="return confirm('Cancel this booking?')">
+                                                Cancel
+                                            </a>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="card">
+                <div class="card-body text-center py-5">
+                    <h5>No Bookings Found</h5>
+                    <p class="text-muted">There are currently no booking records in the system.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

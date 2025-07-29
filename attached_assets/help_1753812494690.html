@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}Help - Laundry Booking System{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <h2 class="mb-4">
+            How to Use the Laundry Booking System
+        </h2>
+
+        <div class="row g-4">
+            <!-- Getting Started -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            Getting Started
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ol>
+                            <li><strong>Create an Account:</strong> Click "Register" to create your student account with a username and password.</li>
+                            <li><strong>Login:</strong> Use your credentials to access the booking system.</li>
+                            <li><strong>Book a Slot:</strong> Select your preferred time, wash type, and payment method.</li>
+                            <li><strong>Complete Payment:</strong> Confirm your booking by completing the payment process.</li>
+                            <li><strong>Use the Laundry:</strong> Arrive on time for your booked slot.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Features -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            Student Features
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Registration & Login</h6>
+                        <ul>
+                            <li>Create a unique username</li>
+                            <li>Set a secure password</li>
+                            <li>Access your personal dashboard</li>
+                        </ul>
+
+                        <h6>Booking Laundry Slots</h6>
+                        <ul>
+                            <li>Choose available time slots (6 AM - 10 PM)</li>
+                            <li>Select cloth type (Regular, Delicate, Heavy Items, etc.)</li>
+                            <li>Pick wash type (Normal, Quick, Heavy Duty, etc.)</li>
+                            <li>Choose payment method</li>
+                        </ul>
+
+                        <h6>Payment Options</h6>
+                        <ul>
+                            <li>Cash payment</li>
+                            <li>Debit/Credit card</li>
+                            <li>Digital wallet</li>
+                            <li>Student account balance</li>
+                        </ul>
+
+                        <h6>Booking History</h6>
+                        <ul>
+                            <li>View all your past bookings</li>
+                            <li>Check booking status</li>
+                            <li>Monitor payment status</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Features -->
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            Admin Features
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Admin Access</h6>
+                        <ul>
+                            <li>Username: admin</li>
+                            <li>Password: admin123</li>
+                        </ul>
+
+                        <h6>Booking Management</h6>
+                        <ul>
+                            <li>View all student bookings</li>
+                            <li>Update booking status</li>
+                            <li>Confirm bookings</li>
+                            <li>Mark bookings as completed</li>
+                            <li>Cancel bookings if needed</li>
+                        </ul>
+
+                        <h6>Status Types</h6>
+                        <ul>
+                            <li><strong>Pending:</strong> Awaiting confirmation</li>
+                            <li><strong>Confirmed:</strong> Booking approved</li>
+                            <li><strong>Completed:</strong> Laundry finished</li>
+                            <li><strong>Cancelled:</strong> Booking cancelled</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pricing Information -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            Pricing Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Base Pricing</h6>
+                                <ul>
+                                    <li>Standard wash: $3.00</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Additional Charges</h6>
+                                <ul>
+                                    <li>Heavy duty wash: +$1.00</li>
+                                    <li>Delicate fabrics: +$0.50</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Time Slots</h6>
+                                <ul>
+                                    <li>2-hour slots available</li>
+                                    <li>Operating hours: 6 AM - 10 PM</li>
+                                    <li>Same day booking allowed</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Rules -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            Important Rules
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Booking Rules</h6>
+                                <ul>
+                                    <li>One booking per time slot only</li>
+                                    <li>Payment required to confirm booking</li>
+                                    <li>Cannot book past time slots</li>
+                                    <li>All fields are required for booking</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Usage Guidelines</h6>
+                                <ul>
+                                    <li>Arrive on time for your slot</li>
+                                    <li>Late arrivals may lose their slot</li>
+                                    <li>Clean up after use</li>
+                                    <li>Report any equipment issues to admin</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            Need More Help?
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <p>If you have questions or encounter issues:</p>
+                        <ul>
+                            <li>Contact the residence hall administration</li>
+                            <li>Report technical issues to IT support</li>
+                            <li>Check your booking status regularly</li>
+                            <li>Ensure payment is completed for confirmed bookings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
