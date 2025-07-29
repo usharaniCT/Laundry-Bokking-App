@@ -91,6 +91,8 @@ The application follows a traditional MVC (Model-View-Controller) architecture u
 - **Payment Colors**: Updated payment status colors - green gradients for confirmed, orange for pending
 - **Admin Dashboard**: Restructured table layout without scrolling, grouped information cleanly
 - **Table Design**: Mixed structured layout with better spacing and organized columns
+- **Admin Login**: Added border radius and gradient styling to admin login page
+- **Chatbot Widget**: Integrated interactive chatbot in bottom left corner with SRIT branding and smart responses
 
 ### Current Limitations
 - Password security needs improvement (hashing required)
