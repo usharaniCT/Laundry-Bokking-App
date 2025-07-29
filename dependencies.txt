@@ -1,0 +1,27 @@
+# Project Dependencies
+# This file lists all the Python packages used in the SRIT Laundry Booking System
+# Dependencies are managed through Replit's package system
+
+## Core Framework
+Flask==3.0.0                    # Web framework
+Flask-SQLAlchemy==3.1.1         # Database ORM integration
+Werkzeug==3.0.1                 # WSGI utilities and security
+
+## Database
+SQLAlchemy==2.0.23              # SQL toolkit and ORM
+psycopg2-binary==2.9.9          # PostgreSQL adapter
+
+## Validation & Security
+email-validator==2.1.0          # Email format validation
+
+## Production Server
+gunicorn==21.2.0                # WSGI HTTP Server
+
+## Installation Instructions
+# Dependencies are automatically managed by Replit
+# To install manually in other environments:
+# pip install -r dependencies.txt
+
+## Environment Variables Required
+# DATABASE_URL=postgresql://username:password@host/database
+# SESSION_SECRET=your-secret-key-here
