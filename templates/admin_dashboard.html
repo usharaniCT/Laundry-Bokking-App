@@ -52,9 +52,15 @@
                                     <td>{{ booking.wash_type }}</td>
                                     <td>{{ booking.payment_method }}</td>
                                     <td>
-                                        <span class="badge bg-{{ 'success' if booking.payment_status == 'Paid' else 'warning' }}">
-                                            {{ booking.payment_status }}
+                                        {% if booking.payment_status == 'Paid' %}
+                                        <span class="badge" style="background: linear-gradient(135deg, #28a745, #20c997); color: white;">
+                                            Payment Confirmed
                                         </span>
+                                        {% else %}
+                                        <span class="badge" style="background: linear-gradient(135deg, #ffc107, #fd7e14); color: white;">
+                                            Payment Pending
+                                        </span>
+                                        {% endif %}
                                     </td>
                                     <td>
                                         <span class="badge bg-{{ 'success' if booking.status == 'Confirmed' else 'primary' if booking.status == 'Completed' else 'secondary' }}">

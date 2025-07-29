@@ -27,24 +27,30 @@
                         </div>
                         <div class="card-body">
                             <h6 class="card-title">
-                                <i class="fas fa-calendar-alt"></i> {{ booking.date }}
+                                {{ booking.date }}
                             </h6>
                             <p class="card-text">
                                 <div class="mb-2">
-                                    <i class="fas fa-clock text-primary"></i> <strong>Time:</strong> {{ booking.time }}
+                                    <strong>Time:</strong> {{ booking.time }}
                                 </div>
                                 <div class="mb-2">
-                                    <i class="fas fa-door-open text-success"></i> <strong>Room:</strong> {{ booking.room_no }}
+                                    <strong>Student:</strong> {{ booking.student_name }}
                                 </div>
                                 <div class="mb-2">
-                                    <i class="fas fa-tshirt text-info"></i> <strong>Cloth Type:</strong> {{ booking.cloth_type }}
+                                    <strong>Room:</strong> {{ booking.room_no }}
                                 </div>
                                 <div class="mb-2">
-                                    <i class="fas fa-wash text-warning"></i> <strong>Wash Type:</strong> {{ booking.wash_type }}
+                                    <strong>Cloth Type:</strong> {{ booking.cloth_type }}
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Wash Type:</strong> {{ booking.wash_type }}
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Payment Method:</strong> {{ booking.payment_method }}
                                 </div>
                                 {% if booking.created_at %}
                                 <div class="mb-1">
-                                    <i class="fas fa-calendar-plus text-muted"></i> <small class="text-muted">Booked on: {{ booking.created_at.strftime('%d %b %Y, %I:%M %p') }}</small>
+                                    <small class="text-muted">Booked on: {{ booking.created_at.strftime('%d %b %Y, %I:%M %p') }}</small>
                                 </div>
                                 {% endif %}
                             </p>
@@ -52,11 +58,17 @@
                         <div class="card-footer" style="border-radius: 0 0 15px 15px;">
                             <div class="d-flex justify-content-between align-items-center">
                                 <small class="text-muted">
-                                    <i class="fas fa-credit-card"></i> {{ booking.payment_method }}
+                                    Status: {{ booking.status }}
                                 </small>
-                                <span class="badge bg-{{ 'success' if booking.payment_status == 'Paid' else 'warning' }}" style="border-radius: 20px;">
-                                    {{ booking.payment_status }}
+                                {% if booking.payment_status == 'Paid' %}
+                                <span class="badge" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border-radius: 20px;">
+                                    Payment Confirmed
                                 </span>
+                                {% else %}
+                                <span class="badge" style="background: linear-gradient(135deg, #ffc107, #fd7e14); color: white; border-radius: 20px;">
+                                    Payment Pending
+                                </span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -66,11 +78,10 @@
         {% else %}
             <div class="card" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                 <div class="card-body text-center py-5">
-                    <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
                     <h5>No Booking History</h5>
                     <p class="text-muted">You haven't made any bookings yet.</p>
                     <a href="{{ url_for('book') }}" class="btn btn-primary" style="border-radius: 25px;">
-                        <i class="fas fa-plus"></i> Make Your First Booking
+                        Make Your First Booking
                     </a>
                 </div>
             </div>

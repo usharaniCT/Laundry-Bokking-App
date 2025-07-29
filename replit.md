@@ -86,7 +86,9 @@ The application follows a traditional MVC (Model-View-Controller) architecture u
 - **Branding**: Updated system title and footer with SRIT Autonomous branding
 - **UI Improvements**: Added border radius to booking forms and cards
 - **Payment Status**: Dynamic payment status display with color changes
-- **Enhanced History**: Improved booking history with detailed information and icons
+- **Enhanced History**: Improved booking history with detailed information showing all booking details
+- **Icon Removal**: Removed all icons from the interface for cleaner appearance
+- **Payment Colors**: Updated payment status colors - green gradients for confirmed, orange for pending
 
 ### Current Limitations
 - Password security needs improvement (hashing required)

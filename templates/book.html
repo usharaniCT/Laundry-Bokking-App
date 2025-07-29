@@ -131,22 +131,22 @@ document.getElementById('payment_method').addEventListener('change', function() 
         
         if (selectedMethod === 'Cash') {
             paymentStatus.className = 'alert alert-success';
-            paymentStatus.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+            paymentStatus.style.background = 'linear-gradient(135deg, #ffc107, #fd7e14)';
             paymentStatus.style.color = 'white';
             paymentStatus.innerHTML = '<strong>Cash Payment Selected</strong> - You can proceed with booking. Please bring exact amount during your slot.';
         } else if (selectedMethod === 'UPI') {
             paymentStatus.className = 'alert alert-info';
-            paymentStatus.style.background = 'linear-gradient(135deg, #17a2b8, #20c997)';
+            paymentStatus.style.background = 'linear-gradient(135deg, #007bff, #0056b3)';
             paymentStatus.style.color = 'white';
             paymentStatus.innerHTML = '<strong>UPI Payment Selected</strong> - You will be redirected to payment page after booking confirmation.';
         } else if (selectedMethod === 'Online') {
             paymentStatus.className = 'alert alert-info';
-            paymentStatus.style.background = 'linear-gradient(135deg, #6f42c1, #20c997)';
+            paymentStatus.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
             paymentStatus.style.color = 'white';
             paymentStatus.innerHTML = '<strong>Online Payment Selected</strong> - You will be redirected to secure payment gateway after booking.';
         } else if (selectedMethod === 'Card') {
             paymentStatus.className = 'alert alert-info';
-            paymentStatus.style.background = 'linear-gradient(135deg, #fd7e14, #20c997)';
+            paymentStatus.style.background = 'linear-gradient(135deg, #dc3545, #c82333)';
             paymentStatus.style.color = 'white';
             paymentStatus.innerHTML = '<strong>Card Payment Selected</strong> - Debit/Credit card payment will be processed securely.';
         }
