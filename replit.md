@@ -74,6 +74,7 @@ The application follows a traditional MVC (Model-View-Controller) architecture u
 
 ### Recent Updates (2025-07-29)
 - **Background Image**: Added SRIT logo as background image for professional branding
+- **Logo Integration**: Set official SRIT logo for navbar and main dashboard page
 - **Payment Integration**: Enhanced payment system with QR code scanner
   - PhonePe UPI ID: 6300622975@ibl
   - Google Pay UPI ID: thippeswamyusha58@okicici
@@ -82,6 +83,7 @@ The application follows a traditional MVC (Model-View-Controller) architecture u
   - Payment confirmation simulation (3-second delay)
   - Button state management for payment confirmation
 - **QR Code**: Integrated actual QR code image for UPI payments
+- **Branding**: Updated system title and footer with SRIT Autonomous branding
 
 ### Current Limitations
 - Password security needs improvement (hashing required)
