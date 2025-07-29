@@ -89,6 +89,8 @@ The application follows a traditional MVC (Model-View-Controller) architecture u
 - **Enhanced History**: Improved booking history with detailed information showing all booking details
 - **Icon Removal**: Removed all icons from the interface for cleaner appearance
 - **Payment Colors**: Updated payment status colors - green gradients for confirmed, orange for pending
+- **Admin Dashboard**: Restructured table layout without scrolling, grouped information cleanly
+- **Table Design**: Mixed structured layout with better spacing and organized columns
 
 ### Current Limitations
 - Password security needs improvement (hashing required)
