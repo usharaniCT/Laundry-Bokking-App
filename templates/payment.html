@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+
+{% block title %}Payment - Laundry Booking System{% endblock %}
+
+{% block content %}
+<style>
+    .payment-card {
+        border-radius: 20px !important;
+    }
+    .payment-card .card-header {
+        border-top-left-radius: 20px !important;
+        border-top-right-radius: 20px !important;
+    }
+    .payment-card .card-body {
+        border-bottom-left-radius: 20px !important;
+        border-bottom-right-radius: 20px !important;
+    }
+    .qr-scanner {
+        width: 200px;
+        height: 200px;
+        border: 2px dashed #6c757d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        background-color: #f8f9fa;
+    }
+    .payment-options {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .payment-option {
+        border: 2px solid #dee2e6;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    .payment-option:hover {
+        border-color: #0d6efd;
+        background-color: #e7f3ff;
+    }
+    .payment-option.selected {
+        border-color: #198754;
+        background-color: #d1e7dd;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card payment-card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    Payment Confirmation
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Booking Details</h5>
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><strong>Student Name:</strong></td>
+                                <td>{{ booking.student_name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Room Number:</strong></td>
+                                <td>{{ booking.room_no }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Date:</strong></td>
+                                <td>{{ booking.date }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Time Slot:</strong></td>
+                                <td>{{ booking.time }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cloth Type:</strong></td>
+                                <td>{{ booking.cloth_type }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Wash Type:</strong></td>
+                                <td>{{ booking.wash_type }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Payment Method:</strong></td>
+                                <td>{{ booking.payment_method }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    Payment Summary
+                                </h5>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Base Wash Fee:</span>
+                                    <span>₹30.00</span>
+                                </div>
+                                {% if booking.wash_type == 'Heavy Duty' %}
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Heavy Duty Surcharge:</span>
+                                    <span>₹10.00</span>
+                                </div>
+                                {% endif %}
+                                {% if booking.cloth_type == 'Delicate Fabrics' %}
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Delicate Care Fee:</span>
+                                    <span>₹5.00</span>
+                                </div>
+                                {% endif %}
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <strong>Total Amount:</strong>
+                                    <strong>
+                                        ₹{% set base_fee = 30.00 %}
+                                        {% set total = base_fee %}
+                                        {% if booking.wash_type == 'Heavy Duty' %}
+                                            {% set total = total + 10.00 %}
+                                        {% endif %}
+                                        {% if booking.cloth_type == 'Delicate Fabrics' %}
+                                            {% set total = total + 5.00 %}
+                                        {% endif %}
+                                        {{ "%.2f"|format(total) }}
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Method Specific UI -->
+                {% if booking.payment_method == 'Cash' %}
+                <div class="alert alert-info mt-4">
+                    <h5 class="alert-heading">Cash Payment</h5>
+                    <p class="mb-2">
+                        <strong>Total Amount to Pay: ₹{% set base_fee = 30.00 %}
+                        {% set total = base_fee %}
+                        {% if booking.wash_type == 'Heavy Duty' %}
+                            {% set total = total + 10.00 %}
+                        {% endif %}
+                        {% if booking.cloth_type == 'Delicate Fabrics' %}
+                            {% set total = total + 5.00 %}
+                        {% endif %}
+                        {{ "%.2f"|format(total) }}</strong>
+                    </p>
+                    <p class="mb-0">Please bring the exact amount to the laundry facility during your booked time slot. Our staff will collect the payment before starting the wash cycle.</p>
+                </div>
+
+                {% elif booking.payment_method in ['UPI', 'Online'] %}
+                <div class="mt-4">
+                    <h5 class="text-center mb-4">Complete Your Payment</h5>
+                    
+                    <!-- QR Scanner -->
+                    <div class="text-center mb-4">
+                        <div class="qr-scanner" style="background-color: white; padding: 20px;">
+                            <img src="{{ url_for('static', filename='images/placeholder.svg') }}" alt="UPI QR Code" style="width: 180px; height: 180px; object-fit: contain;">
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-muted mb-1">UPI ID: thippeswamyusha58@okicici</p>
+                            <small class="text-muted">Scan to pay with any UPI app</small>
+                        </div>
+                    </div>
+
+                    <!-- Payment Options -->
+                    <div class="payment-options">
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'phonepe')">
+                            <img src="https://logoeps.com/wp-content/uploads/2013/03/phonepe-vector-logo.png" alt="PhonePe" style="width: 60px; height: 40px; object-fit: contain;">
+                            <p class="mb-0 mt-2 small">PhonePe</p>
+                        </div>
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'googlepay')">
+                            <img src="https://developers.google.com/pay/api/images/brand-guidelines/google-pay-mark.png" alt="Google Pay" style="width: 60px; height: 40px; object-fit: contain;">
+                            <p class="mb-0 mt-2 small">Google Pay</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-4">
+                        <strong>Demo Payment:</strong> This is a simulation. No actual payment will be processed.
+                    </div>
+                </div>
+
+                {% elif booking.payment_method == 'Card' %}
+                <div class="mt-4">
+                    <h5 class="text-center mb-4">Complete Your Payment</h5>
+                    
+                    <!-- QR Scanner for Card Payment -->
+                    <div class="text-center mb-4">
+                        <div class="qr-scanner" style="background-color: white; padding: 20px;">
+                            <img src="{{ url_for('static', filename='images/placeholder.svg') }}" alt="UPI QR Code" style="width: 180px; height: 180px; object-fit: contain;">
+                        </div>
+                        <div class="mt-3">
+                            <p class="text-muted mb-1">UPI ID: thippeswamyusha58@okicici</p>
+                            <small class="text-muted">Scan to pay with any UPI app</small>
+                        </div>
+                    </div>
+
+                    <!-- Payment Options -->
+                    <div class="payment-options">
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'phonepe')">
+                            <img src="https://logoeps.com/wp-content/uploads/2013/03/phonepe-vector-logo.png" alt="PhonePe" style="width: 60px; height: 40px; object-fit: contain;">
+                            <p class="mb-0 mt-2 small">PhonePe</p>
+                        </div>
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'googlepay')">
+                            <img src="https://developers.google.com/pay/api/images/brand-guidelines/google-pay-mark.png" alt="Google Pay" style="width: 60px; height: 40px; object-fit: contain;">
+                            <p class="mb-0 mt-2 small">Google Pay</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-4">
+                        <strong>Demo Payment:</strong> This is a simulation. No actual payment will be processed.
+                    </div>
+                </div>
+                {% endif %}
+
+                <form method="POST" class="mt-4">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('book') }}" class="btn btn-secondary me-md-2">
+                            Back to Booking
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            {% if booking.payment_method == 'Cash' %}
+                                Confirm Booking
+                            {% else %}
+                                Confirm Payment
+                            {% endif %}
+                        </button>
+                    </div>
+                </form>
+
+<script>
+function selectPaymentOption(element, method) {
+    // Remove selected class from all options
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.classList.remove('selected');
+    });
+    
+    // Add selected class to clicked option
+    element.classList.add('selected');
+    
+    // You can add logic here to handle the payment method selection
+    console.log('Selected payment method:', method);
+}
+</script>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
