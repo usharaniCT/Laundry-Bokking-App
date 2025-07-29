@@ -72,11 +72,22 @@ The application follows a traditional MVC (Model-View-Controller) architecture u
 - Proxy fix middleware for deployment behind reverse proxies
 - Database connection pooling and health checks
 
+### Recent Updates (2025-07-29)
+- **Background Image**: Added SRIT logo as background image for professional branding
+- **Payment Integration**: Enhanced payment system with QR code scanner
+  - PhonePe UPI ID: 6300622975@ibl
+  - Google Pay UPI ID: thippeswamyusha58@okicici
+- **Payment Simulation**: Added realistic payment verification flow
+  - Dynamic UPI ID switching based on selected payment method
+  - Payment confirmation simulation (3-second delay)
+  - Button state management for payment confirmation
+- **QR Code**: Integrated actual QR code image for UPI payments
+
 ### Current Limitations
 - Password security needs improvement (hashing required)
 - No email verification system
 - Basic error handling
 - Limited admin functionality
-- Missing payment processing integration
+- Payment processing is simulated (needs real gateway integration)
 
 The application is structured for easy deployment on cloud platforms and includes proper separation of concerns between models, views, and business logic.

@@ -159,28 +159,28 @@
                     <!-- QR Scanner -->
                     <div class="text-center mb-4">
                         <div class="qr-scanner" style="background-color: white; padding: 20px;">
-                            <img src="{{ url_for('static', filename='images/placeholder.svg') }}" alt="UPI QR Code" style="width: 180px; height: 180px; object-fit: contain;">
+                            <img src="{{ url_for('static', filename='images/qr-code.jpg') }}" alt="UPI QR Code" style="width: 180px; height: 180px; object-fit: contain;">
                         </div>
                         <div class="mt-3">
-                            <p class="text-muted mb-1">UPI ID: thippeswamyusha58@okicici</p>
+                            <p class="text-muted mb-1">UPI ID: <span id="current-upi-id">thippeswamyusha58@okicici</span></p>
                             <small class="text-muted">Scan to pay with any UPI app</small>
                         </div>
                     </div>
 
                     <!-- Payment Options -->
                     <div class="payment-options">
-                        <div class="payment-option" onclick="selectPaymentOption(this, 'phonepe')">
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'phonepe', '6300622975@ibl')">
                             <img src="https://logoeps.com/wp-content/uploads/2013/03/phonepe-vector-logo.png" alt="PhonePe" style="width: 60px; height: 40px; object-fit: contain;">
                             <p class="mb-0 mt-2 small">PhonePe</p>
                         </div>
-                        <div class="payment-option" onclick="selectPaymentOption(this, 'googlepay')">
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'googlepay', 'thippeswamyusha58@okicici')">
                             <img src="https://developers.google.com/pay/api/images/brand-guidelines/google-pay-mark.png" alt="Google Pay" style="width: 60px; height: 40px; object-fit: contain;">
                             <p class="mb-0 mt-2 small">Google Pay</p>
                         </div>
                     </div>
                     
-                    <div class="alert alert-warning mt-4">
-                        <strong>Demo Payment:</strong> This is a simulation. No actual payment will be processed.
+                    <div class="alert alert-info mt-4" id="payment-status-upi">
+                        <strong>Payment Status:</strong> Select a payment method and wait for payment confirmation.
                     </div>
                 </div>
 
@@ -191,28 +191,28 @@
                     <!-- QR Scanner for Card Payment -->
                     <div class="text-center mb-4">
                         <div class="qr-scanner" style="background-color: white; padding: 20px;">
-                            <img src="{{ url_for('static', filename='images/placeholder.svg') }}" alt="UPI QR Code" style="width: 180px; height: 180px; object-fit: contain;">
+                            <img src="{{ url_for('static', filename='images/qr-code.jpg') }}" alt="UPI QR Code" style="width: 180px; height: 180px; object-fit: contain;">
                         </div>
                         <div class="mt-3">
-                            <p class="text-muted mb-1">UPI ID: thippeswamyusha58@okicici</p>
+                            <p class="text-muted mb-1">UPI ID: <span id="current-upi-id-card">thippeswamyusha58@okicici</span></p>
                             <small class="text-muted">Scan to pay with any UPI app</small>
                         </div>
                     </div>
 
                     <!-- Payment Options -->
                     <div class="payment-options">
-                        <div class="payment-option" onclick="selectPaymentOption(this, 'phonepe')">
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'phonepe', '6300622975@ibl')">
                             <img src="https://logoeps.com/wp-content/uploads/2013/03/phonepe-vector-logo.png" alt="PhonePe" style="width: 60px; height: 40px; object-fit: contain;">
                             <p class="mb-0 mt-2 small">PhonePe</p>
                         </div>
-                        <div class="payment-option" onclick="selectPaymentOption(this, 'googlepay')">
+                        <div class="payment-option" onclick="selectPaymentOption(this, 'googlepay', 'thippeswamyusha58@okicici')">
                             <img src="https://developers.google.com/pay/api/images/brand-guidelines/google-pay-mark.png" alt="Google Pay" style="width: 60px; height: 40px; object-fit: contain;">
                             <p class="mb-0 mt-2 small">Google Pay</p>
                         </div>
                     </div>
                     
-                    <div class="alert alert-warning mt-4">
-                        <strong>Demo Payment:</strong> This is a simulation. No actual payment will be processed.
+                    <div class="alert alert-info mt-4" id="payment-status-card">
+                        <strong>Payment Status:</strong> Select a payment method and wait for payment confirmation.
                     </div>
                 </div>
                 {% endif %}
@@ -233,7 +233,10 @@
                 </form>
 
 <script>
-function selectPaymentOption(element, method) {
+let selectedPaymentMethod = null;
+let paymentConfirmed = false;
+
+function selectPaymentOption(element, method, upiId) {
     // Remove selected class from all options
     document.querySelectorAll('.payment-option').forEach(option => {
         option.classList.remove('selected');
@@ -242,9 +245,70 @@ function selectPaymentOption(element, method) {
     // Add selected class to clicked option
     element.classList.add('selected');
     
-    // You can add logic here to handle the payment method selection
-    console.log('Selected payment method:', method);
+    // Update UPI ID display
+    const upiDisplays = document.querySelectorAll('#current-upi-id, #current-upi-id-card');
+    upiDisplays.forEach(display => {
+        if (display) display.textContent = upiId;
+    });
+    
+    // Update payment status
+    const statusElements = document.querySelectorAll('#payment-status-upi, #payment-status-card');
+    statusElements.forEach(status => {
+        if (status) {
+            status.className = 'alert alert-warning mt-4';
+            status.innerHTML = '<strong>Payment Pending:</strong> Please scan the QR code and complete payment using ' + 
+                             (method === 'phonepe' ? 'PhonePe' : 'Google Pay') + ' to UPI ID: ' + upiId;
+        }
+    });
+    
+    selectedPaymentMethod = method;
+    
+    // Simulate payment verification after 3 seconds
+    setTimeout(() => {
+        simulatePaymentVerification(method, upiId);
+    }, 3000);
+    
+    console.log('Selected payment method:', method, 'UPI ID:', upiId);
 }
+
+function simulatePaymentVerification(method, upiId) {
+    const statusElements = document.querySelectorAll('#payment-status-upi, #payment-status-card');
+    statusElements.forEach(status => {
+        if (status) {
+            status.className = 'alert alert-success mt-4';
+            // Calculate total amount
+            let total = 30.00;
+            if ('{{ booking.wash_type }}' === 'Heavy Duty') total += 10.00;
+            if ('{{ booking.cloth_type }}' === 'Delicate Fabrics') total += 5.00;
+            
+            status.innerHTML = '<strong>Payment Confirmed!</strong> Payment of ₹' + total.toFixed(2) + ' received successfully from ' + 
+                             (method === 'phonepe' ? 'PhonePe' : 'Google Pay') + ' (UPI ID: ' + upiId + '). You can now confirm your booking.';
+        }
+    });
+    
+    paymentConfirmed = true;
+    
+    // Enable the confirm payment button
+    const confirmButton = document.querySelector('button[type="submit"]');
+    if (confirmButton) {
+        confirmButton.disabled = false;
+        confirmButton.classList.remove('btn-secondary');
+        confirmButton.classList.add('btn-success');
+    }
+}
+
+// Initially disable the confirm button for online payments
+document.addEventListener('DOMContentLoaded', function() {
+    const paymentMethod = '{{ booking.payment_method }}';
+    if (paymentMethod === 'UPI' || paymentMethod === 'Online' || paymentMethod === 'Card') {
+        const confirmButton = document.querySelector('button[type="submit"]');
+        if (confirmButton) {
+            confirmButton.disabled = true;
+            confirmButton.classList.remove('btn-success');
+            confirmButton.classList.add('btn-secondary');
+        }
+    }
+});
 </script>
             </div>
         </div>

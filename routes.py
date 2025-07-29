@@ -167,10 +167,20 @@ def payment(booking_id):
     booking = Booking.query.get_or_404(booking_id)
     
     if request.method == 'POST':
-        booking.payment_status = "Paid"
-        booking.status = "Confirmed"
-        db.session.commit()
-        flash("Payment successful! Your slot is confirmed.", 'success')
+        # For cash payments, confirm immediately
+        if booking.payment_method == 'Cash':
+            booking.payment_status = "Paid"
+            booking.status = "Confirmed"
+            db.session.commit()
+            flash("Booking confirmed! Please bring exact cash amount during your time slot.", 'success')
+        else:
+            # For online payments (UPI, Online, Card), simulate payment verification
+            # In a real system, this would integrate with actual payment gateway APIs
+            booking.payment_status = "Paid"
+            booking.status = "Confirmed"
+            db.session.commit()
+            flash("Payment successful! Your booking is confirmed. You will receive confirmation shortly.", 'success')
+        
         return redirect(url_for('history', student_name=booking.student_name))
 
     return render_template('payment.html', booking=booking)
